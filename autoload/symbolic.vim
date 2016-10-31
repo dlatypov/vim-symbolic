@@ -1,8 +1,10 @@
 fun! symbolic#Toggle(bang)
   if a:bang || (exists("b:symbolic_syntax") && b:symbolic_syntax)
     let b:symbolic_syntax = 0
-    let &l:conceallevel = b:old_conceallevel
-    unlet b:old_conceallevel
+    if exists('b:old_conceallevel')
+      let &l:conceallevel = b:old_conceallevel
+      unlet b:old_conceallevel
+    endif
     syn clear symbolicStuff
     syn clear symbolicLetters
   else
